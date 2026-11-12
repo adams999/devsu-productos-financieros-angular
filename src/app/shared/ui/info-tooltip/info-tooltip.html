@@ -1,0 +1,17 @@
+<button
+  #trigger
+  type="button"
+  class="info-trigger"
+  [attr.aria-label]="'Información sobre ' + label()"
+  [attr.aria-describedby]="open() ? tooltipId : null"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  (focus)="show()"
+  (blur)="onBlur()"
+  (click)="show()"
+>
+  <span aria-hidden="true">i</span>
+</button>
+<div #panel [id]="tooltipId" role="tooltip" class="tooltip-panel" popover="manual" hidden>
+  {{ text() }}
+</div>

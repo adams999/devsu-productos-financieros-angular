@@ -1,0 +1,32 @@
+<button
+  #trigger
+  type="button"
+  class="action-menu-trigger"
+  [attr.aria-label]="label()"
+  [attr.aria-controls]="panelId"
+  [attr.aria-expanded]="open()"
+  (click)="toggleMenu()"
+>
+  <span aria-hidden="true">⋮</span>
+</button>
+<div
+  #panel
+  class="action-menu-panel"
+  [id]="panelId"
+  [attr.aria-label]="label()"
+  role="group"
+  popover="auto"
+  hidden
+  (toggle)="onPopoverToggle()"
+>
+  @for (action of actions(); track action.id) {
+    <button
+      type="button"
+      [class.danger-action]="action.destructive"
+      [disabled]="action.disabled"
+      (click)="onSelect(action.id)"
+    >
+      {{ action.label }}
+    </button>
+  }
+</div>

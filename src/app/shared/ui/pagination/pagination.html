@@ -1,0 +1,27 @@
+<div class="pagination-controls">
+  <label [for]="pageSizeId">{{ pageSizeLabel() }}</label>
+  <select [id]="pageSizeId" [value]="pageSize()" (change)="onPageSizeChange($event)">
+    @for (size of pageSizes(); track size) {
+      <option [value]="size">{{ size }}</option>
+    }
+  </select>
+  <nav [attr.aria-label]="ariaLabel()" class="pagination">
+    <button
+      type="button"
+      aria-label="Página anterior"
+      [disabled]="page() <= 1"
+      (click)="pageChange.emit(page() - 1)"
+    >
+      ‹
+    </button>
+    <span aria-live="polite">{{ page() }} de {{ pageCount() }}</span>
+    <button
+      type="button"
+      aria-label="Página siguiente"
+      [disabled]="page() >= pageCount()"
+      (click)="pageChange.emit(page() + 1)"
+    >
+      ›
+    </button>
+  </nav>
+</div>

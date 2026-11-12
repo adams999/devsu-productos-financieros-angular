@@ -1,0 +1,85 @@
+<main class="form-page">
+  <a routerLink="/products" class="back-link">‹ Volver a productos</a>
+  <section class="form-card" aria-labelledby="form-title">
+    <header class="form-header">
+      <h1 id="form-title">{{ isEdit ? 'Editar producto' : 'Formulario de Registro' }}</h1>
+    </header>
+    @if (isEdit && store.isLoading()) {
+      <p class="form-loading" role="status">Cargando producto…</p>
+    } @else if (isEdit && !store.hasLoadedProduct()) {
+      <div class="load-failure" role="alert">
+        <p>{{ store.error() || 'No se pudo cargar el producto.' }}</p>
+        @if (store.error()) {
+          <button type="button" class="secondary" (click)="store.load(productId())">
+            Reintentar
+          </button>
+        }
+      </div>
+    } @else {
+      @if (store.error()) {
+        <p class="form-error" role="alert">{{ store.error() }}</p>
+      }
+      <form novalidate (submit)="onSubmit($event)">
+        <div class="form-grid">
+          <app-input-control
+            controlId="product-id"
+            label="ID"
+            [field]="productForm.id"
+            autocomplete="off"
+            [status]="
+              !isEdit && store.idVerification().status === 'pending'
+                ? 'Verificando disponibilidad del ID…'
+                : undefined
+            "
+            (valueInput)="onIdInput($event)"
+          />
+          <app-input-control
+            controlId="product-name"
+            label="Nombre"
+            [field]="productForm.name"
+            autocomplete="off"
+          />
+          <app-textarea-control
+            controlId="product-description"
+            label="Descripción"
+            [field]="productForm.description"
+          />
+          <app-input-control
+            controlId="product-logo"
+            label="Logo"
+            [field]="productForm.logo"
+            autocomplete="url"
+            inputMode="url"
+          />
+          <app-input-control
+            controlId="date-release"
+            label="Fecha de liberación"
+            type="date"
+            [field]="productForm.dateRelease"
+            (valueInput)="onReleaseInput($event)"
+          />
+          <app-input-control
+            controlId="date-revision"
+            label="Fecha de revisión"
+            type="date"
+            [field]="productForm.dateRevision"
+            hint="Se calcula un año después de la liberación."
+          />
+        </div>
+        <div class="form-actions">
+          <button
+            type="button"
+            class="secondary"
+            [disabled]="store.isSaving() || (isEdit && !store.hasUnsavedChanges())"
+            (click)="onReset()"
+          >
+            {{ isEdit ? 'Deshacer cambios' : 'Reiniciar' }}
+          </button>
+          <button type="submit" class="primary" [disabled]="!canSubmit()">
+            {{ store.isSaving() ? 'Guardando…' : isEdit ? 'Guardar cambios' : 'Enviar' }}
+          </button>
+        </div>
+      </form>
+    }
+  </section>
+</main>

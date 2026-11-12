@@ -1,0 +1,12 @@
+@if (toast.notice(); as notice) {
+  <div
+    class="toast"
+    [class.toast-error]="notice.kind === 'error'"
+    [attr.role]="notice.kind === 'error' ? 'alert' : 'status'"
+    aria-atomic="true"
+  >
+    <span class="toast-icon" aria-hidden="true">{{ notice.kind === 'error' ? '!' : '✓' }}</span>
+    <p>{{ notice.message }}</p>
+    <button type="button" aria-label="Cerrar aviso" (click)="toast.dismiss()">×</button>
+  </div>
+}

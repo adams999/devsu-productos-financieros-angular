@@ -1,0 +1,8 @@
+<label [for]="controlId()">{{ label() }}</label>
+<input
+  [id]="controlId()"
+  type="search"
+  [placeholder]="placeholder()"
+  [value]="value()"
+  (input)="onInput($event)"
+/>

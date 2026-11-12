@@ -1,0 +1,65 @@
+<main class="page">
+  <div class="page-heading">
+    <div>
+      <p class="eyebrow">Administración</p>
+      <h1>Productos financieros</h1>
+    </div>
+  </div>
+  <section class="list-panel" aria-label="Productos financieros">
+    <div class="toolbar">
+      <app-search-field
+        controlId="product-search"
+        label="Buscar productos"
+        [value]="store.searchTerm()"
+        [debounceMs]="500"
+        (valueInput)="onSearchInput($event)"
+      />
+      <a class="add-button" routerLink="/products/new">Agregar</a>
+    </div>
+    <div class="table-card">
+      <app-products-table
+        [products]="store.visibleProducts()"
+        [loading]="store.isLoading()"
+        [error]="store.error()"
+        [emptyMessage]="store.emptyMessage()"
+        [actions]="rowActions"
+        [productLink]="productLink"
+        (actionRequested)="onRowAction($event)"
+        (retry)="store.load()"
+      />
+      <footer class="table-footer">
+        <p aria-live="polite">
+          {{ store.resultCount() }} {{ store.resultCount() === 1 ? 'resultado' : 'resultados' }}
+          @if (store.resultCount()) {
+            <span class="visible-range"
+              >· Mostrando {{ store.firstVisible() }}–{{ store.lastVisible() }}</span
+            >
+          }
+        </p>
+        <app-pagination
+          [page]="store.currentPage()"
+          [pageCount]="store.pageCount()"
+          [pageSize]="store.pageSize()"
+          [pageSizes]="pageSizes"
+          ariaLabel="Páginas de productos"
+          (pageChange)="onPageChange($event)"
+          (pageSizeChange)="onPageSizeChange($event)"
+        />
+      </footer>
+    </div>
+  </section>
+</main>
+@if (selectedProduct(); as product) {
+  <app-action-confirm-dialog
+    heading="Eliminar producto"
+    busyLabel="Eliminando…"
+    errorHint="Puedes reintentar o cancelar."
+    [busy]="deletion.isDeleting()"
+    [error]="deletion.error()"
+    (cancelRequested)="onCancelDelete()"
+    (confirm)="onConfirmDelete()"
+  >
+    ¿Estás seguro de eliminar el producto <strong>{{ product.name }}</strong
+    >?
+  </app-action-confirm-dialog>
+}

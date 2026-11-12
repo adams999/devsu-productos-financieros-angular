@@ -1,0 +1,76 @@
+<app-data-table
+  ariaLabel="Listado de productos"
+  [loading]="loading()"
+  [error]="error()"
+  loadingLabel="Cargando productos…"
+  (retry)="retry.emit()"
+>
+  <thead>
+    <tr>
+      <th scope="col">Logo</th>
+      <th scope="col">Nombre del producto</th>
+      <th scope="col">
+        Descripción
+        <app-info-tooltip label="Descripción" text="Descripción del producto financiero." />
+      </th>
+      <th scope="col">
+        Fecha de liberación
+        <app-info-tooltip
+          label="Fecha de liberación"
+          text="Fecha desde la que el producto está disponible para los clientes."
+        />
+      </th>
+      <th scope="col">
+        Fecha de revisión
+        <app-info-tooltip
+          label="Fecha de revisión"
+          text="Fecha prevista para revisar las condiciones del producto."
+        />
+      </th>
+      <th scope="col" class="action-heading" aria-label="Acciones"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @if (loading()) {
+      @for (row of [1, 2, 3, 4, 5]; track row) {
+        <tr class="skeleton-row" aria-hidden="true">
+          <td><span class="skeleton skeleton-logo"></span></td>
+          <td><span class="skeleton skeleton-text"></span></td>
+          <td><span class="skeleton skeleton-text"></span></td>
+          <td><span class="skeleton skeleton-date"></span></td>
+          <td><span class="skeleton skeleton-date"></span></td>
+          <td></td>
+        </tr>
+      }
+    } @else if (!error()) {
+      @for (product of products(); track product.id) {
+        <tr>
+          <td><app-avatar-image [src]="product.logo" [label]="product.name" /></td>
+          <td class="product-name">
+            @if (productLink(); as linkFor) {
+              <a [routerLink]="linkFor(product)">{{ product.name }}</a>
+            } @else {
+              {{ product.name }}
+            }
+          </td>
+          <td>{{ product.description }}</td>
+          <td>{{ displayDate(product.dateRelease) }}</td>
+          <td>{{ displayDate(product.dateRevision) }}</td>
+          <td class="actions-cell">
+            @if (actions().length) {
+              <app-action-menu
+                [label]="'Acciones para ' + product.name"
+                [actions]="actions()"
+                (actionSelected)="onRowAction($event, product)"
+              />
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="6" class="empty-cell">{{ emptyMessage() }}</td>
+        </tr>
+      }
+    }
+  </tbody>
+</app-data-table>

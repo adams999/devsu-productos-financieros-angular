@@ -1,0 +1,22 @@
+<div class="field" [class.invalid]="showError()">
+  <label [for]="controlId()">{{ label() }}</label>
+  <input
+    [id]="controlId()"
+    [type]="type()"
+    [formField]="field()"
+    [attr.autocomplete]="autocomplete()"
+    [attr.inputmode]="inputMode()"
+    [attr.aria-invalid]="showError()"
+    [attr.aria-describedby]="describedBy()"
+    (input)="onValueInput($event)"
+  />
+  @if (hint(); as message) {
+    <p [id]="hintId()" class="field-hint">{{ message }}</p>
+  }
+  @if (status(); as message) {
+    <p [id]="statusId()" class="field-hint" role="status">{{ message }}</p>
+  }
+  @if (showError()) {
+    <p [id]="errorId()" class="field-error">{{ field()().errors()[0]?.message }}</p>
+  }
+</div>

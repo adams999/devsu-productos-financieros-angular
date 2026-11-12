@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+.table-scroll {
+  max-height: var(--data-table-max-height, none);
+  overflow: auto;
+  background: var(--surface);
+}
+table {
+  width: 100%;
+  min-width: var(--data-table-min-width, 100%);
+  border-collapse: collapse;
+  text-align: left;
+}
+.feedback {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: #fff2f3;
+  color: #8f2933;
+}
+.feedback p {
+  margin: 0;
+}
+.feedback button {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid #d49ba1;
+  border-radius: 0.3rem;
+  background: var(--surface);
+  color: inherit;
+}
+.table-status {
+  margin: 0.75rem 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

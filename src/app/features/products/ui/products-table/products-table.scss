@@ -1,0 +1,80 @@
+:host {
+  display: block;
+  --data-table-min-width: 780px;
+  --data-table-max-height: min(34rem, max(27rem, calc(100dvh - 14rem)));
+}
+th,
+td {
+  padding: 1.05rem 0.85rem;
+  border-bottom: 1px solid #edf0f4;
+  vertical-align: middle;
+}
+th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f7f8fa;
+  color: #333b4a;
+  box-shadow: 0 1px 0 var(--border);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+td {
+  font-size: 0.88rem;
+  color: #3b4351;
+}
+tbody tr:hover {
+  background: #fafbfe;
+}
+.product-name {
+  font-weight: 600;
+  color: var(--text);
+}
+.product-name a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-decoration-color: #aebad5;
+  text-underline-offset: 0.14em;
+}
+.product-name a:hover {
+  text-decoration-color: currentColor;
+}
+.action-heading,
+.actions-cell {
+  width: 3rem;
+  text-align: right;
+}
+.empty-cell {
+  padding: 3.5rem 1rem;
+  color: var(--muted);
+  text-align: center;
+}
+.skeleton {
+  display: block;
+  height: 0.75rem;
+  border-radius: 0.4rem;
+  background: #e8ecf3;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+.skeleton-logo {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+}
+.skeleton-text {
+  width: 80%;
+}
+.skeleton-date {
+  width: 5rem;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

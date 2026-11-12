@@ -1,0 +1,51 @@
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+.info-trigger {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: help;
+}
+.info-trigger span {
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: #9299a6;
+  color: white;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.info-trigger:hover span,
+.info-trigger:focus-visible span {
+  background: var(--brand);
+}
+.tooltip-panel {
+  position: fixed;
+  inset: auto;
+  z-index: 10;
+  width: max-content;
+  max-width: min(18rem, calc(100vw - 1rem));
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-radius: 0.3rem;
+  background: #273247;
+  color: white;
+  box-shadow: 0 0.4rem 1rem #24375b30;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.4;
+  white-space: normal;
+}
+.tooltip-panel[hidden] {
+  display: none;
+}

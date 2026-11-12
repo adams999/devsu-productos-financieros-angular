@@ -1,0 +1,13 @@
+<div #scrollRegion class="table-scroll" role="region" [attr.aria-label]="ariaLabel()" tabindex="0">
+  <table>
+    <ng-content />
+  </table>
+</div>
+@if (loading()) {
+  <p class="table-status" role="status">{{ loadingLabel() }}</p>
+} @else if (error()) {
+  <div class="feedback" role="alert">
+    <p>{{ error() }}</p>
+    <button type="button" (click)="retry.emit()">{{ retryLabel() }}</button>
+  </div>
+}

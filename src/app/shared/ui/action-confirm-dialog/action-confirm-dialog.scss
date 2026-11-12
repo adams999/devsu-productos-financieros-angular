@@ -1,0 +1,69 @@
+:host {
+  display: block;
+}
+.dialog {
+  width: min(calc(100% - 2rem), 28rem);
+  max-height: calc(100% - 2rem);
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 0.45rem;
+  background: var(--surface);
+  box-shadow: 0 1.4rem 3.5rem #0f14265c;
+}
+.dialog::backdrop {
+  background: #171a25a8;
+}
+.dialog-body {
+  min-height: 10rem;
+  padding: 2rem 1.75rem;
+}
+.dialog h2 {
+  margin: 0 0 1.15rem;
+  color: var(--text);
+  font-size: 1.18rem;
+}
+.dialog p {
+  margin: 0;
+  line-height: 1.5;
+}
+.dialog .dialog-error {
+  margin: 0 1.75rem 1rem;
+  color: var(--danger);
+  font-size: 0.88rem;
+}
+.dialog-actions {
+  display: flex;
+  gap: 0.8rem;
+  padding: 1.35rem 1.75rem;
+  border-top: 1px solid var(--border);
+}
+.dialog-actions button {
+  flex: 1;
+  min-height: 2.8rem;
+  border: 0;
+  border-radius: 0.25rem;
+  font-weight: 600;
+}
+.secondary {
+  background: var(--gray-button);
+  color: var(--brand);
+}
+.secondary:hover:not(:disabled) {
+  background: var(--gray-button-hover);
+}
+.primary {
+  background: var(--yellow);
+  color: var(--brand);
+}
+.primary:hover:not(:disabled) {
+  background: var(--yellow-hover);
+}
+@media (max-width: 380px) {
+  .dialog-actions {
+    padding-inline: 1rem;
+  }
+  .dialog-body {
+    padding-inline: 1rem;
+  }
+}

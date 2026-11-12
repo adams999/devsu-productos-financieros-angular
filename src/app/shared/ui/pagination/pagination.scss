@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+label {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+select {
+  min-width: 3.4rem;
+  padding: 0.4rem;
+  border: 1px solid var(--control-border);
+  border-radius: 0.25rem;
+  background: var(--surface);
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.6rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.pagination button {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  background: var(--surface);
+}
+@media (max-width: 600px) {
+  .pagination-controls {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}

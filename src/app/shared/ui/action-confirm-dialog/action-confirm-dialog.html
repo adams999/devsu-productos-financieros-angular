@@ -1,0 +1,27 @@
+<dialog
+  #dialog
+  class="dialog"
+  role="alertdialog"
+  aria-modal="true"
+  tabindex="-1"
+  [attr.aria-labelledby]="titleId"
+  [attr.aria-describedby]="descriptionId"
+  [attr.aria-busy]="busy()"
+  (cancel)="onCancel($event)"
+>
+  <div class="dialog-body">
+    <h2 [id]="titleId">{{ heading() }}</h2>
+    <p [id]="descriptionId"><ng-content /></p>
+  </div>
+  @if (error()) {
+    <p class="dialog-error" role="alert">{{ error() }} {{ errorHint() }}</p>
+  }
+  <div class="dialog-actions">
+    <button #cancelButton type="button" class="secondary" [disabled]="busy()" (click)="onCancel()">
+      {{ cancelLabel() }}
+    </button>
+    <button type="button" class="primary" [disabled]="busy()" (click)="onConfirm()">
+      {{ busy() ? busyLabel() : confirmLabel() }}
+    </button>
+  </div>
+</dialog>

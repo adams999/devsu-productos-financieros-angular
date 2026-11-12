@@ -1,0 +1,17 @@
+<span class="avatar-frame">
+  @if (imageUrl(); as url) {
+    @if (failedUrl() !== url) {
+      <img
+        [src]="url"
+        [alt]="alt()"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        (error)="onImageError(url)"
+      />
+    } @else {
+      <span class="avatar-placeholder" aria-hidden="true">{{ initials() }}</span>
+    }
+  } @else {
+    <span class="avatar-placeholder" aria-hidden="true">{{ initials() }}</span>
+  }
+</span>

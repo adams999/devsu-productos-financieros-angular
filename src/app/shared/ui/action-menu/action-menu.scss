@@ -1,0 +1,55 @@
+:host {
+  display: inline-block;
+}
+.action-menu-trigger {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 0;
+  border-radius: 0.3rem;
+  background: transparent;
+  color: #5c6473;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.action-menu-trigger:hover,
+.action-menu-trigger[aria-expanded='true'] {
+  background: #eff2f7;
+}
+.action-menu-panel {
+  position: fixed;
+  inset: auto;
+  z-index: 10;
+  min-width: 8.5rem;
+  max-width: calc(100vw - 1rem);
+  margin: 0;
+  padding: 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  background: var(--surface);
+  box-shadow: 0 0.6rem 1.4rem #24375b24;
+}
+.action-menu-panel[hidden] {
+  display: none;
+}
+.action-menu-panel button {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-radius: 0.25rem;
+  background: var(--surface);
+  color: var(--text);
+  text-align: left;
+}
+.action-menu-panel button:hover {
+  background: #f1f4f9;
+}
+.action-menu-panel button:disabled {
+  opacity: 0.55;
+}
+.action-menu-panel .danger-action {
+  color: #a8323b;
+}
